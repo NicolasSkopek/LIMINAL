@@ -18,4 +18,10 @@ O projeto inclui pastas interativas que irão exibir imagens e vídeos de certos
 
 AINDA NÃO FINALIZADO
 
-![Image Alt text](/images/desktop.png
+![Image Alt text](/images/desktop.png)
+
+![Image Alt text](/images/file.png)
+
+![Image Alt text](/images/lobby.png)
+
+![Image Alt text](/images/songs.png)
