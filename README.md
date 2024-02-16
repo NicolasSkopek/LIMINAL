@@ -17,3 +17,5 @@ estruturas e identidades são deixadas para trás, mas o novo ainda não se mani
 O projeto inclui pastas interativas que irão exibir imagens e vídeos de certos "Liminal Spaces", juntamente de músicas de fundo, que instigam o sentimento de nostalgia.
 
 AINDA NÃO FINALIZADO
+
+![Image Alt text](/images/desktop.png
