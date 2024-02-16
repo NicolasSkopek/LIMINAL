@@ -6,7 +6,7 @@ structures and identities are left behind, but the new has not yet fully manifes
   - The project tries to recreate the classic Windows XP, adding the theme of Liminal Spaces, which are apparently abandoned places that, in the past, used to be full of people.
 The project includes interactive folders that will display images and videos of certain "Liminal Spaces", along with background music, which instills a feeling of nostalgia.
 
-*NOT FINISHED YET*
+*NOT FINISHED*
 
 <hr>
 
