@@ -8,6 +8,7 @@ The project includes interactive folders that will display images and videos of 
 NOT FINISHED YET
 
 ------------------------------------------------------------------//-------------------------------------------------------------------------------
+
 Liminal – Refere-se a um estado de transição, um espaço 
 entre o que foi e o que será. É um tempo de incerteza, onde as velhas 
 estruturas e identidades são deixadas para trás, mas o novo ainda não se manifestou plenamente.
