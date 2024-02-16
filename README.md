@@ -5,8 +5,9 @@ structures and identities are left behind, but the new has not yet fully manifes
 The project tries to recreate the classic Windows XP, adding the theme of Liminal Spaces, which are apparently abandoned places that, in the past, used to be full of people.
 The project includes interactive folders that will display images and videos of certain "Liminal Spaces", along with background music, which instills a feeling of nostalgia.
 
-*NOT FINISHED YET*
------------------------------
+NOT FINISHED YET
+
+------------------------------------------------------------------//-------------------------------------------------------------------------------
 Liminal – Refere-se a um estado de transição, um espaço 
 entre o que foi e o que será. É um tempo de incerteza, onde as velhas 
 estruturas e identidades são deixadas para trás, mas o novo ainda não se manifestou plenamente.
@@ -14,4 +15,4 @@ estruturas e identidades são deixadas para trás, mas o novo ainda não se mani
 - O projeto tenta recriar o clássic Windows XP, adicionando o tema dos Liminal Spaces, que são locais aparentemente abandonados, que, outrora, costumava ser cheio de pessoas. 
 O projeto inclui pastas interativas que irão exibir imagens e vídeos de certos "Liminal Spaces", juntamente de músicas de fundo, que instigam o sentimento de nostalgia.
 
-*AINDA NÃO FINALIZADO*
+AINDA NÃO FINALIZADO
