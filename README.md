@@ -2,7 +2,7 @@ Liminal - It refers to a state of transition, a space
 between what was and what will be. It is a time of uncertainty, where old 
 structures and identities are left behind, but the new has not yet fully manifested itself.
 
-The project tries to recreate the classic Windows XP, adding the theme of Liminal Spaces, which are apparently abandoned places that, in the past, used to be full of people.
+- The project tries to recreate the classic Windows XP, adding the theme of Liminal Spaces, which are apparently abandoned places that, in the past, used to be full of people.
 The project includes interactive folders that will display images and videos of certain "Liminal Spaces", along with background music, which instills a feeling of nostalgia.
 
 NOT FINISHED YET
