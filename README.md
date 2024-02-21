@@ -15,8 +15,8 @@ Refere-se a um estado de transição, um espaço
 entre o que foi e o que será. É um tempo de incerteza, onde as velhas 
 estruturas e identidades são deixadas para trás, mas o novo ainda não se manifestou plenamente.
 
-  - O projeto tenta recriar o clássic Windows XP, adicionando o tema dos Liminal Spaces, que são locais aparentemente abandonados, que, outrora, costumava ser cheio de pessoas. 
-O projeto inclui pastas interativas que irão exibir imagens e vídeos de certos "Liminal Spaces", juntamente de músicas de fundo, que instigam o sentimento de nostalgia.
+  - O projeto tenta recriar o clássico Windows XP, adicionando o tema dos *Liminal Spaces*, que são locais aparentemente abandonados, que, outrora, costumava ser cheio de pessoas. 
+O projeto inclui pastas interativas que irão exibir imagens e vídeos de certos "Liminal Spaces", com músicas ao fundo que instigam o sentimento de nostalgia.
 
 *AINDA NÃO FINALIZADO*
 
