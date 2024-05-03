@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <title>L I M I N A L</title>
+    <link rel="icon" href="{{ url_for('static', filename='styles/images/icon.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/index.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='scripts/click.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/erro.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/relogio.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</head>
+
+<body>
+    <script>
+        function changeWallpaper() {
+            var body = document.getElementsByTagName('body')[0];
+            var images = ["Follow.jpg", "Azul.jpg", "Red moon desert.jpg", "Stonehenge.jpg", "Wind.jpg", "xp.jpg"]
+            var currImage = document.querySelector('body').style.backgroundImage.split("/images/background/")[1];
+            if (currImage !== "" && currImage !== undefined) {
+                var finalCurrImage = currImage.split('")')[0]
+                
+                var index = images.indexOf(finalCurrImage);
+                if (index !== images.length - 1) {
+                    body.style.backgroundImage = 'url("../static/styles/images/background/' + images[images.indexOf(finalCurrImage) + 1];
+                } else {
+                    body.style.backgroundImage = 'url("../static/styles/images/background/' + images[0];
+                }
+                
+            } else {
+                body.style.backgroundImage = 'url("../static/styles/images/background/' + images[0];
+            }
+        }   
+
+        function playMario() {
+            document.getElementById("mario").style.display = "block";
+            document.getElementById("mario").play();
+            document.getElementById("trumpet").play();
+            document.body.style.backgroundImage = 'url("../static/styles/images/ty26hmpfe3f51.jpg")';
+            document.body.style.backgroundRepeat = "repeat";
+            document.body.style.backgroundSize = "100px 100px";
+            document.getElementById("error-sound").play();
+
+            setTimeout(function () {
+                window.close();
+                open(location, "_self").close();
+            }, 5800);
+        }
+
+    </script>
+    <div class="containment"></div>
+    <div class="menu-backdrop" id="menu-backdrop" style="width: 100vw; height: 100vh; position: absolute; display: none;"></div>
+    <div class="container-fluid container-main">
+        <div class="barradiv no-select">
+            <img src="{{ url_for('static', filename='styles/images/bar-replica.png') }}" class="barra">
+        </div>
+        <div class="relogio no-select" id="relogio">
+            <span id="clock-text"></span>
+        </div>
+        <div class="windows" data-bs-toggle="modal" data-bs-target="#modal-bar" onclick="playSound('click');"></div>
+        {% block body %}
+        <div class="icon-group mt-3">
+            <div class="group">
+                <img src="{{ url_for('static', filename='styles/images/trash.png') }}" class="icon" id="thrash"
+                    data-bs-toggle="modal" data-bs-target="#modal-trash" onclick="playSound('click');">
+                <div class="recycle icon-text no-select">Recycle Bin</div>
+            </div>
+            <div class="group">
+                <img src="{{ url_for('static', filename='styles/images/file.png') }}" class="icon mt-4"
+                    onclick="playSound('click');" data-bs-toggle="modal" data-bs-target="#explorer">
+                <div class="songs icon-text no-select">liminal</div>
+            </div>
+            <div class="group">
+                <img src="{{ url_for('static', filename='styles/images/music-folder.png') }}" class="icon mt-4"
+                    onclick="playSound('click');" data-bs-toggle="modal" data-bs-target="#modal-songs">
+                <div class="songs icon-text no-select">songs</div>
+            </div>
+            <div class="group">
+                <img src="{{ url_for('static', filename='styles/images/console.dll_14_1-2.png') }}" class="icon mt-4"
+                    onclick="playSound('click');" ondblclick="changeWallpaper()" id="change-wallpaper">
+                <div class="songs icon-text no-select">wallpapers.exe</div>
+            </div>
+            <div class="group">
+                <img src="{{ url_for('static', filename='styles/images/sprb0401.dll_14_10601_1025-3.png') }}"
+                    class="icon mt-4" onclick="playSound('click'); playMario();" id="change-wallpaper">
+                <div class="songs icon-text no-select">clickme.exe</div>
+            </div>
+        </div>
+        <div class="mario-container">
+            <video style="display: none;" id="mario">
+                <source src="../static/styles/images/Hmm Oh NiCe CoMpUtEr YoU gOt HeRe.mp4" type="video/mp4">
+            </video>
+        </div>
+        {% endblock %}
+        <script>
+            $(function () {
+                $(".group").draggable({
+                    handle: ".icon-text",
+                    containment: ".containment",
+                    grid: [100, 100]
+                });
+                $(".modal").draggable({
+                    handle: ".modal-header",
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+                const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+                $('.folder-click').click(function () {
+                    $('#fullscreen-video-container').show();
+                    var video = $('#fullscreen-video')[0];
+                    video.load();
+                    video.play();
+
+                    setTimeout(function () {
+                        video.pause();
+                        $('#fullscreen-video-container').hide();
+                    }, 3000);
+                });
+            });
+        </script>
+        <!-- Modal -->
+        <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" id="error-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">Error</h1>
+                        <button class="close-btn no-select" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="playSound('click')">X</button>
+                    </div>
+                    <div class="modal-body no-select" id="modal-body">
+                        <img src="../static/styles/images/explorer.exe_14_111-4.png" class="error-image no-select">
+                        <span style="margin-left: 1rem;" class="no-select">You shouldn't be here.</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary no-select" data-bs-dismiss="modal"
+                            onclick="playSound('click')">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="error2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" id="error-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">Error</h1>
+                        <button class="close-btn no-select" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="playSound('click')">X</button>
+                    </div>
+                    <div class="modal-body no-select" id="modal-body">
+                        <img src="../static/styles/images/shell32.dll_14_263-2.png" class="error-image no-select">
+                        <span style="margin-left: 1rem;" class="no-select">You don't exist.</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary no-select" data-bs-dismiss="modal"
+                            onclick="playSound('click')">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="explorer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" ""
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content no-select">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">
+                            <img src="../static/styles/images/file-icon.png"
+                                style="width: 6%; margin-left: -0.8rem; margin-bottom: 0.3rem;">
+                            liminal
+                        </h1>
+                        <button class="close-btn no-select" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="playSound('click')">X</button>
+                    </div>
+                    <div class="modal-body modal-body-scrollable" id="modal-body">
+                        <div class="btn-group btn-group-sm" role="group" id="options">
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">File</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">Edit</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">View</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">Tools</button>
+                            <button type="button" class="btn option active toggle-button" onclick="playSound('click')"
+                                data-bs-toggle="button" id="toggle-music" aria-pressed="true">Toggle music</button>
+                            <button type="button" class="btn option openHelpModal"
+                                onclick="playSound('click')">Help</button>
+                        </div>
+                        <div class="row folderModal" style="margin-top: -1rem;">
+                            {% for space in spaces %}
+                            <div class="col col-md-3 no-select">
+                                <a class="openSpaceModal" data-space-id="{{ space['id'] }}"><img
+                                        src="{{ url_for('static', filename='styles/images/file.png') }}"
+                                        class="icon mt-4" onclick="playSound('click');"></a>
+                                <div class="liminal icon-text black">{{ space["name"] }}</div>
+                            </div>
+                            {% endfor %}
+                            <div class="col col-md-3 no-select">
+                                <a class="folder-click"><img
+                                        src="{{ url_for('static', filename='styles/images/file.png') }}"
+                                        class="icon mt-4" onclick="playSound('click'); playSound('error-sound')"></a>
+                                <div class="liminal icon-text black">???</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                var explorerModal = $("#explorer")
+                $('.openSpaceModal').click(function () {
+                    var spaceId = $(this).data("space-id");
+                    explorerModal.modal("show");
+                    $('#modal-space-' + spaceId).modal('show');
+                });
+                $('.openDescriptionModal').click(function () {
+                    var spaceId = $(this).data("space-id");
+                    $('#modal-notepad-' + spaceId).modal('show');
+                })
+
+                $('.openHelpModal').click(function () {
+                    $('#modal-help').modal('show');
+                })
+
+                $('.openErrorModal').click(function () {
+                    $('#staticBackdrop').modal('show');
+                })
+
+                $('.openErrorModal2').click(function () {
+                    $('#error2').modal('show');
+                })
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                var isImageModalOpen = false;
+                var spaceId;
+                var imageIndex;
+                var totalImages;
+
+                function openImageModal(spaceId, imageIndex) {
+                    var modalId = "#modal-image-" + spaceId + "-" + imageIndex;
+                    $(modalId).modal("show");
+                    isImageModalOpen = true;
+                }
+
+                function closeImageModal(spaceId, imageIndex) {
+                    var modalId = "#modal-image-" + spaceId + "-" + imageIndex;
+                    $(modalId).modal("hide");
+                    isImageModalOpen = false;
+                }
+
+                $('.openImageModal').click(function () {
+                    spaceId = $(this).data("space-id");
+                    imageIndex = $(this).data("image-index");
+                    totalImages = $('#modal-space-' + spaceId).attr('data-total-images') - 1;
+                    openImageModal(spaceId, imageIndex);
+                });
+
+                $(document).on('keydown', function (e) {
+                    if (isImageModalOpen) {
+                        if (e.which === 37 && imageIndex > 0) {
+                            closeImageModal(spaceId, imageIndex);
+                            imageIndex = imageIndex - 1;
+                            openImageModal(spaceId, imageIndex);
+                        } else if (e.which === 39 && imageIndex < totalImages) {
+                            closeImageModal(spaceId, imageIndex);
+                            imageIndex = imageIndex + 1;
+                            openImageModal(spaceId, imageIndex);
+                        }
+                    }
+                });
+            });
+
+            function stopSpaceSound() {
+                document.querySelectorAll(".liminal-song").forEach(liminal_song => {
+                    liminal_song.pause();
+                    liminal_song.currentTime = 0;
+                })
+            }
+        </script>
+        {% for space in spaces %}
+        <div class="modal space-modal" id="modal-space-{{ space['id'] }}" data-bs-backdrop="static"
+            data-bs-keyboard="false" data-total-images="{{ space['media']|length }}">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                <div class="modal-content no-select" style="max-width: 500px;">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">
+                            <img src="../static/styles/images/icon.png"
+                                style="width: 6%; margin-left: -0.8rem; margin-bottom: 0.3rem;">
+                            {{ space['name'] }}
+                        </h1>
+                        <button class="close-btn no-select" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="playSound('click'); stopSpaceSound()">X</button>
+                    </div>
+                    <div class="modal-body modal-body-scrollable" id="modal-body">
+                        <div class="btn-group btn-group-sm" role="group" id="options">
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">File</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">Edit</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">View</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">Tools</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">Help</button>
+                        </div>
+                        <div class="row folderModal">
+                            <div class="col col-md-3 no-select">
+                                <a class="openDescriptionModal" data-space-id="{{ space['id'] }}"><img
+                                        src="{{ url_for('static', filename='styles/images/NOTEPAD.EXE_14_2-6.png') }}"
+                                        class="icon mt-4" onclick="playSound('click');"></a>
+                                <div class="liminal icon-text black">description.txt</div>
+                            </div>
+                            {% for media in space['media'] %}
+                            <div class="col col-md-2 no-select">
+                                <a class="
+                                {% if not '.mp3' in media %}
+                                    openImageModal
+                                {% endif %}
+                                " data-image-index="{{ loop.index0 }}" data-space-id="{{ space['id'] }}">
+                                {% if ".mp4" not in media and ".mp3" not in media %}
+                                    <img src="{{ media }}" class="icon mt-4" onclick="playSound('click');"></a>
+                                {% elif ".mp4" in media %}
+                                <img src="../static/styles/images/media.png" class="icon mt-4 trigger-modal-video" id="trigger-modal-video-{{ space['id'] }}-index-{{ loop.index0 }}"
+                                    onclick="playSound('click');"></a>
+                                {% elif ".mp3" in media %}
+                                <img src="../static/styles/images/song-icon.png" class="icon mt-4 play-space-sound"
+                                    onclick="playSound('click'); stopSpaceSound(); playSound('{{ media }}')"></a>
+                                {% endif %}
+                                {% set random_name = randomString(2, 10) %}
+                                <div class="liminal icon-text black" {% if random_name|length> 4 %}
+                                    data-bs-custom-class="custom-tooltip"
+                                    data-bs-toggle="tooltip" data-bs-title="
+
+                                    {% if ".mp4" not in media and ".mp3" not in media %}
+                                    {{ random_name }}.png
+                                    {% elif ".mp3" in media %}
+                                    {{ media }}.mp3
+                                    {% else %}
+                                    {{ random_name }}.mp4
+                                    {% endif %}
+
+                                    " data-bs-placement="bottom"
+                                    {% endif %}
+                                    >
+                                    {% if ".mp4" not in media and ".mp3" not in media %}
+                                    {% if random_name|length > 4 %}
+                                    {{ random_name[:4] }}..
+                                    {% else %}
+                                    {{ random_name }}.png
+                                    {% endif %}
+                                    {% elif ".mp3" in media %}
+                                    {{ media[:7] }}..
+                                    {% else %}
+                                    {% if random_name|length > 4 %}
+                                    {{ random_name[:4] }}..
+                                    {% else %}
+                                    {{ random_name }}.mp4
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="modal-notepad-{{ space['id'] }}" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header no-select">
+                        <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">
+                            <img src="../static/styles/images/NOTEPAD.EXE_14_2-6.png"
+                                style="width: 10%; margin-left: -0.8rem; margin-bottom: 0.3rem;">
+                            description - Notepad
+                        </h1>
+                        <button class="close-btn no-select" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="playSound('click')">X</button>
+                    </div>
+                    <div class="modal-body modal-body-scrollable" id="modal-body">
+                        <div class="btn-group btn-group-sm" role="group" id="options">
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">File</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">Edit</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">Format</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">View</button>
+                            <button type="button" class="btn option openErrorModal"
+                                onclick="playSound('click'); playSound('error')">Help</button>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-12">
+                                <div class="liminal icon-text black">
+                                    <span class="textarea" style="width: 100%;" role="textbox" contenteditable
+                                        spellcheck="false">{{ space["description"] }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function stopVideo(modalId) {
+                var modalVideo = document.getElementById('modal-video-' + modalId);
+                if (modalVideo) {
+                    modalVideo.pause();
+                    modalVideo.currentTime = 0;
+                }
+            }
+        </script>
+        {% for image in space['media'] %}
+        {% if not ".mp3" in image %}
+        <div class="modal" id="modal-image-{{ space['id'] }}-{{ space['media'].index(image) }}"
+            data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header no-select">
+                        <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">
+                            <img src="../static/styles/images/setup_wm.exe_14_71-6.png"
+                                style="width: 6%; margin-left: -0.8rem; margin-bottom: 0.3rem;">
+                            {% if ".mp4" not in image %}
+                            {{ loop.index }}.png - Windows Picture and Fax Viewer
+                            {% else %}
+                            {{ loop.index }}.mp4 - Windows Media Player
+                            {% endif %}
+                        </h1>
+                        <button class="close-btn no-select closeImageModal" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="playSound('click'); stopVideo(`{{ space['id'] }}-{{ space['media'].index(image) }}`)">X</button>
+                    </div>
+                    <div class="modal-body no-select" id="modal-body">
+                        <div class="row folderModal">
+                            <div class="col col-md-12">
+                                {% if ".mp4" not in image %}
+                                <img class="liminal-image" src="{{ image }}"
+                                    style="max-width: 100%; max-height: 100%;" />
+                                {% else %}
+                                <div class="video-container">
+                                    <video width="100%" height="100%" controls
+                                        id="modal-video-{{ space['id'] }}-{{ space['media'].index(image) }}">
+                                        <source src="{{ image }}" width="640" height="360">
+                                    </video>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        <div class="modal" id="modal-help" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header no-select">
+                        <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">
+                            <img src="../static/styles/images/NOTEPAD.EXE_14_2-6.png"
+                                style="width: 10%; margin-left: -0.8rem; margin-bottom: 0.3rem;">
+                            ?.txt - Notepad
+                        </h1>
+                        <button class="close-btn no-select" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="playSound('click')">X</button>
+                    </div>
+                    <div class="modal-body no-select" id="modal-body">
+                        <div class="row">
+                            <div class="col col-md-12">
+                                <div class="liminal icon-text black">this can't be real</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            document.getElementById('backgroundMusic').volume = 0.5;
+            $('.space-modal').on('shown.bs.modal', function () {
+                if ($('#toggle-music').hasClass('active')) {
+                    setTimeout(function () {
+                        playRandomMusic();
+                    }, 100);
+                }
+            });
+
+            $('.space-modal').on('hidden.bs.modal', function () {
+                document.getElementById('backgroundMusic').pause();
+                document.getElementById('backgroundMusic').currentTime = 0;
+                const toast = bootstrap.Toast.getOrCreateInstance(document.getElementById('toast'));
+                toast.hide();
+            });
+
+            $(".play-space-sound").on("click", function () {
+                document.getElementById('backgroundMusic').pause();
+                document.getElementById('backgroundMusic').currentTime = 0;
+            })
+
+            $(".playSong").on("click", function () {
+                index = $(this).data("index");
+                playMusic(index);
+            })
+            $("#modal-songs").on("hidden.bs.modal", function () {
+                document.getElementById('backgroundMusic').pause();
+                document.getElementById('backgroundMusic').currentTime = 0;
+                const toast = bootstrap.Toast.getOrCreateInstance(document.getElementById('toast'));
+                toast.hide();
+            })
+        });
+
+        function playRandomMusic() {
+            var audio = document.getElementById('backgroundMusic');
+            var sources = audio.getElementsByTagName('source');
+
+            var randomIndex = Math.floor(Math.random() * sources.length);
+            var randomSource = sources[randomIndex].src;
+            audio.src = randomSource;
+            audio.load();
+            audio.play();
+
+            var name = $(sources[randomIndex]).data("name")
+
+            document.querySelector("#toast .toast-body").textContent = "Now playing: " + name;
+
+            const toast = bootstrap.Toast.getOrCreateInstance(document.getElementById('toast'));
+            toast.show();
+        }
+
+        function playMusic(index) {
+            var audio = document.getElementById('backgroundMusic');
+            var sources = audio.getElementsByTagName('source');
+            var source = sources[index].src;
+            audio.src = source;
+            audio.load();
+            audio.play();
+
+            var name = $(sources[index]).data("name")
+            document.querySelector("#toast .toast-body").textContent = "Now playing: " + name;
+            const toast = bootstrap.Toast.getOrCreateInstance(document.getElementById('toast'));
+            toast.show();
+        }
+    </script>
+    <div class="modal" id="modal-songs" data-bs-backdrop="static" data-bs-keyboard="false" "">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header no-select">
+                    <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">
+                        <img src="../static/styles/images/music-folder.png"
+                            style="width: 6%; margin-left: -0.8rem; margin-bottom: 0.3rem;">
+                        songs
+                    </h1>
+                    <button class="close-btn no-select" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="playSound('click')">X</button>
+                </div>
+                <div class="modal-body no-select modal-body-scrollable" id="modal-body">
+                    <div class="btn-group btn-group-sm" role="group" id="options">
+                        <button type="button" class="btn option openErrorModal"
+                            onclick="playSound('click'); playSound('error')">File</button>
+                        <button type="button" class="btn option openErrorModal"
+                            onclick="playSound('click'); playSound('error')">Edit</button>
+                        <button type="button" class="btn option openErrorModal"
+                            onclick="playSound('click'); playSound('error')">Format</button>
+                        <button type="button" class="btn option openErrorModal"
+                            onclick="playSound('click'); playSound('error')">View</button>
+                        <button type="button" class="btn option openErrorModal"
+                            onclick="playSound('click'); playSound('error')">Help</button>
+                    </div>
+                    <div class="row folderModal">
+                        {% for song in songs %}
+                        <div class="col col-md-3 no-select">
+                            <a class="playSong" data-index="{{ loop.index0 }}" data-name="{{ song }}"><img
+                                    src="{{ url_for('static', filename='styles/images/song-icon.png') }}"
+                                    class="icon mt-4" onclick="playSound('click');"></a>
+                            <div class="liminal icon-text black">
+                                {% if song|length <= 14 %} {{ song }} {% else %} <span
+                                    data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip"
+                                    data-bs-title="{{ song }}" data-bs-placement="bottom">{{ song[:14] }}..</span>
+                                    {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modal-trash" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header no-select">
+                    <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">
+                        <img src="../static/styles/images/trash.png"
+                            style="width: 5%; margin-left: -0.8rem; margin-bottom: 0.3rem;">
+                        Recycle Bin
+                    </h1>
+                    <button class="close-btn no-select" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="playSound('click')">X</button>
+                </div>
+                <div class="modal-body no-select modal-body-scrollable" id="modal-body">
+                    <div class="btn-group btn-group-sm" role="group" id="options">
+                        <button type="button" class="btn option openErrorModal"
+                            onclick="playSound('click'); playSound('error')">Empty</button>
+                        <button type="button" class="btn option openErrorModal"
+                            onclick="playSound('click'); playSound('error')">Help</button>
+                    </div>
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th class="table-text" onclick="playSound('exclamation');">it.exe</th>
+                            </tr>
+                            <tr>
+                                <th class="table-text" onclick="playSound('exclamation');">feels.exe</th>
+                            </tr>
+                            <tr>
+                                <th class="table-text" onclick="playSound('exclamation');">like.exe</th>
+                            </tr>
+                            <tr>
+                                <th class="table-text" onclick="playSound('exclamation');">a.exe</th>
+                            </tr>
+                            <tr>
+                                <th class="table-text" onclick="playSound('exclamation');">dream.exe</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modal-bar" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content modal-bar-content">
+                <div class="modal-header no-select" style="height: 3rem !important;">
+                    <h1 class="modal-title fs-5 no-select" id="staticBackdropLabel">
+                        <img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1222169770.1701734400&semt=ais"
+                            style="width: 10%; margin-left: -0.8rem;" id="user_pic">
+                        User
+                    </h1>
+                </div>
+                <div class="modal-body no-select" id="modal-body">
+                    <div class="menu-1 menu">
+                        <div class="row">
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/icwconn1.exe_14_201-2.png" style="width: 12%;">
+                                <strong>Internet</strong>
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/msoeres.dll_14_2-3.png" style="width: 12%;">
+                                <strong>Email</strong>
+                            </div>
+                            <div class="menu-1-separator"></div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/NOTEPAD.EXE_14_2-6.png" style="width: 12%;">
+                                Notepad
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/setup_wm.exe_14_71-6.png" style="width: 12%;">
+                                Windows Media Player
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/Messenger.png" style="width: 12%;">
+                                Windows Messenger
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="menu-2 menu">
+                        <div class="row">
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/shell32.dll_14_235-8.png" style="width: 13%;">
+                                <strong>My Documents</strong>
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/mstask.dll_14_100-6.png" style="width: 13%;">
+                                <strong>My Recent Documents</strong>
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/srchui.dll_14_236-7.png" style="width: 13%;">
+                                <strong>My Pictures</strong>
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/shell32.dll_14_237-9.png" style="width: 13%;">
+                                <strong>My Music</strong>
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/sprb0401.dll_14_10702_1025-9.png" style="width: 13%;">
+                                <strong>My Computer</strong>
+                            </div>
+                            <div class="menu-2-separator"></div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/Control_Panel_XP.webp" style="width: 13%;">
+                                Control Panel
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/moricons.dll_14_114-8.png" style="width: 13%;">
+                                Set Program Access and Defaults
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/shell32.dll_14_138-4.png" style="width: 13%;">
+                                Printers and Faxes
+                            </div>
+                            <div class="menu-2-separator"></div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/shell32.dll_14_24-0.png" style="width: 13%;">
+                                Help and Support
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/shell32.dll_14_323-7.png" style="width: 13%;">
+                                Search
+                            </div>
+                            <div class="col col-md-12 no-select mb-2 menu-item openErrorModal2"
+                                onclick="playSound('click'); playSound('error')">
+                                <img src="../static/styles/images/shell32.dll_14_160-0.png" style="width: 13%;">
+                                Run...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row" id="logoff">
+                        <div class="col no-select menu-item">
+                            <img src="../static/styles/images/shell32.dll_14_325-8.png" style="width: 25%;">
+                            Log Off
+                        </div>
+                    </div>
+                    <div class="row" id="turnoff">
+                        <div class="col no-select menu-item">
+                            <img src="../static/styles/images/shell32.dll_14_28-9.png" style="width: 17%;">
+                            Turn Off Computer
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="toast bottom-0 end-0 position-fixed mb-5" role="alert" aria-live="assertive" aria-atomic="true"
+        id="toast" style="margin-right: 15px;">
+        <div class="toast-header no-select">
+            <img src="../static/styles/images/icon.png" style="width: 6%; margin-left: -0.5rem; margin-bottom: 0.3rem;">
+            <span style="margin-bottom: 0.3rem;">Notification</span>
+            <button class="close-btn no-select ms-auto" data-bs-dismiss="toast" aria-label="Close"
+                onclick="playSound('click')" style="margin-right: -10px !important; margin-bottom: 0.3rem;">X</button>
+        </div>
+        <div class="toast-body">
+        </div>
+    </div>
+    <!-- AUDIOS -->
+    <audio id="click" src="{{ url_for('static', filename='styles/audios/click.mp3') }}"></audio>
+    <audio id="error-sound" src="{{ url_for('static', filename='styles/audios/error-sound-2.mp3') }}"></audio>
+    <audio id="pop-up-blocked" src="{{ url_for('static', filename='styles/audios/pop-up-blocked.mp3') }}"></audio>
+    <audio id="error" src="{{ url_for('static', filename='styles/audios/error.mp3') }}"></audio>
+    <audio id="exclamation" src="{{ url_for('static', filename='styles/audios/exclamation.mp3') }}"></audio>
+    <audio id="start" src="../static/styles/audios/windows-xp-startup-sound.mp3"></audio>
+    <audio id="trumpet"
+        src="../static/styles/images/The Boiled One Phenomenon_ PHEN-228 Trumpet Sound_G-Rq8iSkDwU.mp3"></audio>
+    <audio id="backgroundMusic">
+        {% for song in songs %}
+        <source src="../static/styles/audios/songs/{{ song }}" type="audio/mp3" data-name="{{ song }}">
+        {% endfor %}
+    </audio>
+    {% for song in songs %}
+    <audio id="{{ song }}" src="../static/styles/audios/songs/{{ song }}" class="liminal-song"></audio>
+    {% endfor %}
+    <!-- ----------- -->
+    <script>
+        function closeFullscreen() {
+            $('#fullscreen-video-container').hide();
+        }
+    </script>
+    <div id="fullscreen-video-container" class="fullscreen-container">
+        <video id="fullscreen-video" onended="closeFullscreen()">
+            <source src="../static/styles/images/y2mate.bz - Windows XP Horror Edition (online-video-cutter.com).mp4"
+                type="video/mp4">
+        </video>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var video = document.getElementById('background-video');
+            var bootContainer = document.querySelector('.boot-container');
+            video.addEventListener('ended', function () {
+                video.style.display = 'none';
+                bootContainer.parentNode.removeChild(bootContainer);
+            });
+        });
+    </script>
+    <!--<div class="boot-container">
+            <video autoplay muted id="intro-video" loop onclick="startMainVideo();">
+                <source src="../static/styles/images/intro.mp4" type="video/mp4">
+            </video>
+            <video id="background-video" style="display: none;">
+                <source src="../static/styles/images/welcome.mp4" type="video/mp4">
+            </video>
+            <script>
+                function startMainVideo() {
+                    document.getElementById('intro-video').style.display = 'none';
+            
+                    var mainVideo = document.getElementById('background-video');
+            
+                    mainVideo.style.display = 'block';
+            
+                    mainVideo.play();
+                    
+                    setTimeout(function () {
+                        playSound('start')
+                    }, 900);
+                }
+            </script>
+        </div>-->
+</body>
+
+</html>
